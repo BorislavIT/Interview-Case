@@ -1,8 +1,8 @@
 import { Suspense } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { SETTINGS_MODULE } from "./constants";
-import useAvailableSettingsModules from "./useAvailableSettingsModules";
 import CircularLoader from "../../Loaders/CircularLoader";
+import useAvailableSettingsModules from "./useAvailableSettingsModules";
 
 const SettingsRouter = () => {
   const availableModules = useAvailableSettingsModules();

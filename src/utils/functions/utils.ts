@@ -1,5 +1,7 @@
 //@ts-ignore
 import en from "react-phone-number-input/locale/en";
+import useCurrentWidth from "../../hooks/useCurrentWidth";
+import { mobielBreakPointPX } from "../constants/globalConstants";
 
 // export function getAccountType() {
 //     const idToken = getIdToken();
@@ -100,4 +102,10 @@ export function removeEmptyObj<ObjectType>(object: ObjectType) {
     }
   }
   return newObj;
+}
+
+export const checkIfMobile = () => {
+  const width = useCurrentWidth();
+
+  return width < mobielBreakPointPX;
 }
