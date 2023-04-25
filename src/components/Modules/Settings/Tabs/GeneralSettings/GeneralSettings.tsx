@@ -1,10 +1,10 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { defaultGeneralSettingsValues, generalSettingsValidationForm } from "./constants";
-import Button from "../../../Buttons/Button";
-import InputField from "../../../InputField/InputField";
+import { defaultGeneralSettingsValues, generalSettingsValidationForm } from "../constants";
 import { useContext } from "react";
-import { ToastContext } from "../../../../contexts/ToastContext";
+import { ToastContext } from "../../../../../contexts/ToastContext";
+import Button from "../../../../Buttons/Button";
+import InputField from "../../../../InputField/InputField";
 
 const GeneralSettings = () => {
   const {

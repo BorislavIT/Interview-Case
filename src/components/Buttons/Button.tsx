@@ -1,8 +1,8 @@
-import React, { forwardRef } from "react";
+import { FC, ReactNode, forwardRef } from "react";
 
 export interface ButtonProps {
   btnType?: "primary" | "secondary" | "text";
-  children?: React.ReactNode;
+  children?: ReactNode;
   onClick?: (e?: any) => void;
   size?: "sm" | "md" | "lg";
   disabled?: boolean;
@@ -11,6 +11,7 @@ export interface ButtonProps {
   className?: string;
   type: "button" | "submit" | "reset";
   form?: string;
+  PrefixComponent?: FC<any>;
 }
 
 const Button = (props: ButtonProps, ref: any) => {
@@ -23,6 +24,7 @@ const Button = (props: ButtonProps, ref: any) => {
     underline,
     form,
     loading,
+    PrefixComponent,
     ...rest
   } = props;
   return (
@@ -30,7 +32,9 @@ const Button = (props: ButtonProps, ref: any) => {
       ref={ref}
       form={form}
       onClick={onClick}
-      className={` ${
+      className={`
+      group
+      ${
         btnType === "primary"
           ? "bg-blue-500 text-white  hover:bg-blue-600"
           : btnType === "secondary"
@@ -39,7 +43,6 @@ const Button = (props: ButtonProps, ref: any) => {
           ? "text-blue-500 hover:text-blue-600 "
           : ""
       } 
-                    
             ${
               size === "sm"
                 ? "px-4 py-1.5 text-button2/semibold"
@@ -53,9 +56,11 @@ const Button = (props: ButtonProps, ref: any) => {
             ${btnType === "text" ? "px-0 py-0 p-0 border-none" : ""} 
             outline-none relative rounded-md disabled:text-gray-400 disabled:border disabled:border-gray-100 disabled:bg-transparent flex items-center justify-center gap-x-1.5 whitespace-nowrap
             ${className}
-            ${loading ? "relative" : ""}`}
+            ${loading ? "relative" : ""}
+            `}
       {...rest}
     >
+      {PrefixComponent && <PrefixComponent className={`[&>path]:group-hover:fill-blue-500`} />}
       {children}
     </button>
   );

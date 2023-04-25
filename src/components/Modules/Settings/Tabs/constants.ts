@@ -21,3 +21,20 @@ export const generalSettingsValidationForm = yup.object().shape({
     password: "",
     newPassword: "",
   }
+
+  export const defaultAddTeamMemberValues = {
+    file: null as any,
+    firstName: "",
+    lastName: "",
+    email: "",
+    role: "",
+    status: ""
+  }
+
+  export const addTeamMemberValidationSchema = yup.object().shape({
+    file: yup.mixed().test("fileSize", "The file is too large", (value) => {
+      if (!value?.length) return true // attachment is optional
+      return value[0].size <= 100000
+    }),
+    
+    });
