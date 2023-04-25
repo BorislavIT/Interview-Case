@@ -89,10 +89,12 @@ const InputField = (props: InputFieldPropsType, ref: any) => {
           // i'm aware i can't just change a base component in a real situation, since the impact will be in multiple modules, but i'm doing it this way, so i dont waste time, im sure its something basic
           className={classNames(
             error
-              ? "  mb-0 placeholder-red-300 border-red-500   focus:ring-red-500  focus:border-red-500  "
-              : "     border-gray-100   focus:ring-blue-500 focus:border-blue-500 text-gray-900",
+              ? "mb-0 placeholder-red-300 border-red-500   focus:ring-red-500  focus:border-red-500 text-red-500"
+              : " border-gray-100   focus:ring-blue-500 focus:border-blue-500 text-gray-900 focus-visible:border-blue-500",
             "placeholder:text-body2/regular placeholder:text-gray-400 text-body2/regular truncate block w-full rounded-md disabled:bg-gray-50/50 disabled:text-gray-400 disabled:border disabled:h-[38px] disabled:pl-3",
-            prefix && "pl-10",
+            prefix ? "pl-10" : "pl-3",
+            "border outline-none",
+            "h-10",
             inputClassName && inputClassName
           )}
           aria-invalid="true"

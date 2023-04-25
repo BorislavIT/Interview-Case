@@ -1,11 +1,11 @@
 import { Suspense } from "react";
-import { Navigate, Route, Routes } from "react-router-dom";
-import { SETTINGS_MODULE } from "./constants";
+import { Route, Routes } from "react-router-dom";
 import CircularLoader from "../../Loaders/CircularLoader";
 import useAvailableSettingsModules from "./useAvailableSettingsModules";
 
 const SettingsRouter = () => {
   const availableModules = useAvailableSettingsModules();
+
   return (
     <Routes>
       {availableModules.map((availableModule, index) => {
@@ -22,7 +22,6 @@ const SettingsRouter = () => {
           />
         );
       })}
-      <Route index element={<Navigate to={`/${SETTINGS_MODULE.ROUTES.BASE}/${SETTINGS_MODULE.ROUTES.GENERAL}`} />} />
     </Routes>
   );
 };

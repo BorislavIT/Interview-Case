@@ -1,55 +1,62 @@
-import { useLocation } from "react-router";
-import { SETTINGS_MODULE } from "../../../Routers/SettingsRouter/constants";
-import { SettingsTab } from "./constants";
+import { useState } from "react";
+import Button from "../../../Buttons/Button";
+import InputField from "../../../InputField/InputField";
 
 const GeneralSettings = () => {
-  const location = useLocation();
-
-  const settingsTabs: SettingsTab[] = [
-    {
-      NAME: "General",
-      ROUTE: `/${SETTINGS_MODULE.ROUTES.BASE}/${SETTINGS_MODULE.ROUTES.GENERAL}`,
-      ACTIVE: location.pathname.includes(SETTINGS_MODULE.ROUTES.GENERAL),
-    },
-    {
-      NAME: "Roles management",
-      ROUTE: `/${SETTINGS_MODULE.ROUTES.BASE}/${SETTINGS_MODULE.ROUTES.ROLES_MANAGEMENT}`,
-      ACTIVE: false,
-    },
-    {
-      NAME: "User management",
-      ROUTE: `/${SETTINGS_MODULE.ROUTES.BASE}/${SETTINGS_MODULE.ROUTES.USER_MANAGEMENT}`,
-      ACTIVE: false,
-    },
-    {
-      NAME: "Notifications",
-      ROUTE: `/${SETTINGS_MODULE.ROUTES.BASE}/${SETTINGS_MODULE.ROUTES.NOTIFICATIONS}`,
-      ACTIVE: false,
-    },
-  ];
+  const [changesMade, setChangesMade] = useState<boolean>(false);
+  const [email, setEmail] = useState<string>("Jenny_smith@gmail.com");
+  const [newEmail, setNewEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [newPassword, setNewPassword] = useState<string>("");
 
   return (
-    <div className={`w-full bg-gray-50 p-10 flex flex-row flex-wrap gap-6`}>
-      <div className={`w-full flex justify-start`}>
-        <div className={`text-header/h2`}>Settings</div>
+    <div className={`w-full flex flex-row flex-wrap gap-6`}>
+      <div className={`w-full flex flex-col gap-2 border-b border-gray-100 pb-6 justify-between md:flex-row md:gap-0`}>
+        <div className={`flex flex-col flex-wrap gap-2 items-start text-left`}>
+          <div className={`text-body1/medium`}>General Settings</div>
+          <div className={`text-body2/regular text-gray-500 mb-2 md:mb-0`}>
+            Here you can change your email and password
+          </div>
+        </div>
+        <div className={`flex flex-row flex-nowrap gap-2 items-start md:items-end w-full md:w-auto justify-between`}>
+          <div>
+            <Button type="submit" btnType="secondary" className={`h-10 text-button1/semibold`}>
+              Cancel
+            </Button>
+          </div>
+          <div>
+            <Button type="submit" btnType="secondary" className={`h-10`} disabled={!changesMade}>
+              Update details
+            </Button>
+          </div>
+        </div>
       </div>
-      <div className={`w-full flex justify-start flex-column gap-3 text-body2/medium`}>
-        {/* design says to use primary-500, but not sure how to do that so picked blue :( */}
-        {settingsTabs.map((settingsTab, index) => {
-          return (
-            <div
-              className={`p-3 text-body2/medium ${
-                settingsTab.ACTIVE ? " border-blue-500 border-solid border-b-[3px]" : "text-gray-500"
-              }`}
-              key={index}
-            >
-              <span className={`cursor-pointer`}>{settingsTab.NAME}</span>
-            </div>
-          );
-        })}
+      <div className={`w-full flex content-start flex-row flex-wrap gap-6`}>
+        <div className={`text-body1/medium w-full text-left`}>Email</div>
+        <div className={`w-full flex flex-row flex-wrap gap-4 md:flex-nowrap`}>
+          <div className={`w-full md:w-3/6 text-left mb-3 md:mb-0`}>
+            <InputField label="Email" placeholder={`Email`} value={email} />
+          </div>
+          <div className={`w-full md:w-3/6 text-left`}>
+            <InputField label="New email" placeholder={`Enter your new email`} value={newEmail} />
+          </div>
+        </div>
       </div>
-      <div className={`w-full flex justify-start`}>
-        <div className={`text-header/h2`}>Settings</div>
+      <div className={`w-full flex content-start flex-row flex-wrap gap-6`}>
+        <div className={`text-body1/medium w-full text-left`}>Password</div>
+        <div className={`w-full flex flex-row flex-wrap gap-4 md:flex-nowrap`}>
+          <div className={`w-full md:w-3/6 text-left mb-3 md:mb-0`}>
+            <InputField label="Password" placeholder={`Password`} type="password" value={password} />
+          </div>
+          <div className={`w-full md:w-3/6 text-left`}>
+            <InputField
+              label="New password"
+              placeholder={`Enter your new password`}
+              type="password"
+              value={newPassword}
+            />
+          </div>
+        </div>
       </div>
     </div>
   );

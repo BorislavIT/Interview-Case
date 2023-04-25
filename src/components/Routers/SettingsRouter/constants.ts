@@ -3,8 +3,8 @@ export const SETTINGS_MODULE = {
     ROUTES: {
         BASE: "Settings",
         GENERAL: "General",
-        ROLES_MANAGEMENT: "Roles Management",
-        USER_MANAGEMENT: "User Management",
+        ROLES_MANAGEMENT: "RolesManagement",
+        USER_MANAGEMENT: "UserManagement",
         NOTIFICATIONS: "Notifications",
     }
 }

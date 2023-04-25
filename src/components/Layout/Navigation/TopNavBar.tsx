@@ -39,7 +39,7 @@ const TopNavBar = () => {
     >
       {resolutionContext.mobileBurgerClicked && (
         <div
-          className={`fixed w-screen bg-gray-50 z-1 h-full flex flex-row flex-wrap left-0 top-16 grow-0 content-start`}
+          className={`fixed w-screen bg-gray-50 z-50 h-full flex flex-row flex-wrap left-0 top-16 grow-0 content-start`}
         >
           <div className={`w-full p-6 border-b-[3px] border-gray-200`}>Currency</div>
           <div className={`w-full p-6 border-b-[3px] border-gray-200`}>Shopping cart</div>
@@ -52,9 +52,6 @@ const TopNavBar = () => {
           placeholder={`Search`}
           value={searchFieldValue}
           onChange={onSearchFieldChange}
-          className={`h-10`}
-          inputClassName={`h-10`}
-          divInputWrapper={`h-10 `}
           prefix={<AiOutlineSearch className={`h-5 w-5 mr-10`} />}
         />
       </div>
