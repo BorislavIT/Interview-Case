@@ -1,13 +1,44 @@
-import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { defaultGeneralSettingsValues, generalSettingsValidationForm } from "./constants";
 import Button from "../../../Buttons/Button";
 import InputField from "../../../InputField/InputField";
+import { useContext } from "react";
+import { ToastContext } from "../../../../contexts/ToastContext";
 
 const GeneralSettings = () => {
-  const [changesMade, setChangesMade] = useState<boolean>(false);
-  const [email, setEmail] = useState<string>("Jenny_smith@gmail.com");
-  const [newEmail, setNewEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  const [newPassword, setNewPassword] = useState<string>("");
+  const {
+    register,
+    formState: { errors, isDirty, isValid },
+    reset,
+    getValues,
+    trigger,
+  } = useForm({
+    defaultValues: defaultGeneralSettingsValues,
+    resolver: yupResolver(generalSettingsValidationForm),
+  });
+
+  const toastContext = useContext(ToastContext);
+
+  const handleUpdateDetailsClicked = () => {
+    trigger();
+    if (!isValid) {
+      console.log("Invalid data");
+      return;
+    }
+    toastContext.setToastVisible(true);
+
+    setTimeout(() => {
+      toastContext.setToastVisible(false);
+    }, 3000);
+
+    console.log(getValues());
+    reset();
+  };
+
+  const onCancelButtonClicked = () => {
+    reset();
+  };
 
   return (
     <div className={`w-full flex flex-row flex-wrap gap-6`}>
@@ -20,12 +51,24 @@ const GeneralSettings = () => {
         </div>
         <div className={`flex flex-row flex-nowrap gap-2 items-start md:items-end w-full md:w-auto justify-between`}>
           <div>
-            <Button type="submit" btnType="secondary" className={`h-10 text-button1/semibold`}>
+            <Button
+              type="submit"
+              btnType="secondary"
+              className={`h-10 text-button1/semibold`}
+              onClick={onCancelButtonClicked}
+              disabled={!isDirty}
+            >
               Cancel
             </Button>
           </div>
           <div>
-            <Button type="submit" btnType="secondary" className={`h-10`} disabled={!changesMade}>
+            <Button
+              type="submit"
+              btnType="secondary"
+              className={`h-10`}
+              disabled={!isDirty}
+              onClick={handleUpdateDetailsClicked}
+            >
               Update details
             </Button>
           </div>
@@ -35,10 +78,15 @@ const GeneralSettings = () => {
         <div className={`text-body1/medium w-full text-left`}>Email</div>
         <div className={`w-full flex flex-row flex-wrap gap-4 md:flex-nowrap`}>
           <div className={`w-full md:w-3/6 text-left mb-3 md:mb-0`}>
-            <InputField label="Email" placeholder={`Email`} value={email} />
+            <InputField label="Email" placeholder={`Email`} {...register("email")} error={errors.email} />
           </div>
           <div className={`w-full md:w-3/6 text-left`}>
-            <InputField label="New email" placeholder={`Enter your new email`} value={newEmail} />
+            <InputField
+              label="New email"
+              placeholder={`Enter your new email`}
+              {...register("newEmail")}
+              error={errors.newEmail}
+            />
           </div>
         </div>
       </div>
@@ -46,14 +94,21 @@ const GeneralSettings = () => {
         <div className={`text-body1/medium w-full text-left`}>Password</div>
         <div className={`w-full flex flex-row flex-wrap gap-4 md:flex-nowrap`}>
           <div className={`w-full md:w-3/6 text-left mb-3 md:mb-0`}>
-            <InputField label="Password" placeholder={`Password`} type="password" value={password} />
+            <InputField
+              label="Password"
+              placeholder={`Password`}
+              type="password"
+              {...register("password")}
+              error={errors.password}
+            />
           </div>
           <div className={`w-full md:w-3/6 text-left`}>
             <InputField
+              error={errors.newPassword}
               label="New password"
               placeholder={`Enter your new password`}
               type="password"
-              value={newPassword}
+              {...register("newPassword")}
             />
           </div>
         </div>

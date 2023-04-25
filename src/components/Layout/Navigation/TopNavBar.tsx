@@ -35,7 +35,7 @@ const TopNavBar = () => {
 
   return (
     <div
-      className={`w-full h-16 flex flex-row justify-between flex-nowrap  px-6 py-1.5  border-b border-gray-100 border-solid gap-3 relative`}
+      className={`w-full h-16 flex flex-row justify-between flex-nowrap  px-6 py-1.5  border-b border-gray-100 border-solid gap-3 rounded-t-md`}
     >
       {resolutionContext.mobileBurgerClicked && (
         <div

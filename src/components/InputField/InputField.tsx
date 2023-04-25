@@ -85,8 +85,6 @@ const InputField = (props: InputFieldPropsType, ref: any) => {
           id={label}
           {...rest}
           ref={ref}
-          // changed the pl-6 to pl-10 when a prefix is given since no matter what I did, pl-6 takes priority over pl-10 for some reason, no matter how i order the classes,
-          // i'm aware i can't just change a base component in a real situation, since the impact will be in multiple modules, but i'm doing it this way, so i dont waste time, im sure its something basic
           className={classNames(
             error
               ? "mb-0 placeholder-red-300 border-red-500   focus:ring-red-500  focus:border-red-500 text-red-500"

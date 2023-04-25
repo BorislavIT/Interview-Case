@@ -16,7 +16,7 @@ const SettingsModule = () => {
   };
 
   return (
-    <div className={`w-full bg-gray-50 p-10 flex flex-row flex-wrap gap-6`}>
+    <div className={`w-full bg-gray-50 p-10 flex flex-row flex-wrap gap-6 rounded-b-md`}>
       <div className={`w-full flex justify-start`}>
         <ModuleHeader name={SETTINGS_MODULE.ROUTES.BASE} />
       </div>
